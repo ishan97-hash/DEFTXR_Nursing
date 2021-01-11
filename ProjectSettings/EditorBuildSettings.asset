@@ -5,7 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
-    path: Assets/Nursing Procedures/Scenes/SampleScene.unity
+  - enabled: 0
+    path: Assets/Nursing Procedures/RT Insertion/Scenes/SampleScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Nursing Procedures/Intubation & Mechanical Ventilation/Scenes/Intubation_&_Mechanical_Ventilation.unity
+    guid: 8a4cd18fb1219634bb0a89a755d3b65e
   m_configObjects: {}
