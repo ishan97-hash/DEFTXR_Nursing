@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/Nursing Procedures/RT Insertion/Scenes/SampleScene.unity
+    path: Assets/Nursing Procedures/Blood Transfusion/Scenes/SampleScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
     path: Assets/Nursing Procedures/Intubation & Mechanical Ventilation/Scenes/Intubation_&_Mechanical_Ventilation.unity
