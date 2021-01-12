@@ -90,12 +90,24 @@ public class ZoneA_GameManager : MonoBehaviour
 
     IEnumerator Step1()
     {
+<<<<<<< Updated upstream
 
         // Step 1
+=======
+            // activate the required component
+
+            yield return new WaitForSeconds(2f);
+
+            // Show Patient
+            patient.SetActive(true);
+
+            // Step 1
+>>>>>>> Stashed changes
             audioSource.PlayOneShot(intro_VO[0]);
             Guides[0].SetActive(true);
             yield return new WaitForSeconds(intro_VO[0].length);
 
+<<<<<<< Updated upstream
     }
 
      IEnumerator Step2()
@@ -120,5 +132,30 @@ public class ZoneA_GameManager : MonoBehaviour
         audioSource.PlayOneShot(intro_VO[3]);
         Guides[3].SetActive(true);
         yield return new WaitForSeconds(intro_VO[3].length);
+=======
+            // Step 2
+            audioSource.PlayOneShot(intro_VO[1]);
+            Guides[0].SetActive(false);
+            Guides[1].SetActive(true);
+            yield return new WaitForSeconds(intro_VO[1].length);
+
+            // Step 3
+            audioSource.PlayOneShot(intro_VO[2]);
+            Guides[1].SetActive(false);
+            Guides[2].SetActive(true);
+            yield return new WaitForSeconds(intro_VO[2].length);
+
+            // Step 4
+            audioSource.PlayOneShot(intro_VO[3]);
+            Guides[2].SetActive(false);
+            Guides[3].SetActive(true);
+            yield return new WaitForSeconds(intro_VO[3].length);
+
+            // Step 5
+            audioSource.PlayOneShot(intro_VO[4]);
+            Guides[2].SetActive(false);
+            Guides[3].SetActive(true);
+            yield return new WaitForSeconds(intro_VO[4].length);
+>>>>>>> Stashed changes
     }
 }
