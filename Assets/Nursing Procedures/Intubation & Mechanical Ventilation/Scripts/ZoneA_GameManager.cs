@@ -23,31 +23,7 @@ public class ZoneA_GameManager : MonoBehaviour
     [SerializeField]
     private GameObject patient;
 
-    private bool grabbedOnce1 = false;
-    private bool grabbedOnce2 = false;
-    private bool grabbedOnce3 = false;
-    private bool grabbedOnce4 = false;
-
-
-    // Grabbable Apparatus Eg. Scissor, Syringe
-    /*[SerializeField]
-    private OVRGrabbable grabbableObject1;
-    [SerializeField]
-    private OVRGrabbable grabbableObject2;
-    [SerializeField]
-    private OVRGrabbable grabbableObject3;
-    [SerializeField]
-    private OVRGrabbable grabbableObject4;*/
-
-    [SerializeField]
-    private GameObject grabbableObject1;
-    [SerializeField]
-    private GameObject grabbableObject2;
-    [SerializeField]
-    private GameObject grabbableObject3;
-    [SerializeField]
-    private GameObject grabbableObject4;
-
+    // Grabbable Apparatus
     [SerializeField]
     private GameObject laryngoscope;
     [SerializeField]
@@ -57,7 +33,8 @@ public class ZoneA_GameManager : MonoBehaviour
     [SerializeField]
     private GameObject syringe;
 
-
+    
+    private bool step1Completed = false;
 
 
     private void Start()
@@ -82,13 +59,11 @@ public class ZoneA_GameManager : MonoBehaviour
 
         //Show Apparatus
         audioSource.PlayOneShot(intro_VO[3]);
-        Guides[0].SetActive(false);
-        Guides[1].SetActive(true);
+        PlayGuide(1);
         yield return new WaitForSeconds(intro_VO[3].length);
 
         audioSource.PlayOneShot(intro_VO[4]);
-        Guides[1].SetActive(false);
-        Guides[2].SetActive(true);
+        PlayGuide(2);
         yield return new WaitForSeconds(intro_VO[4].length);
 
         audioSource.PlayOneShot(intro_VO[5]);
@@ -99,9 +74,9 @@ public class ZoneA_GameManager : MonoBehaviour
 
         //Step 1 Beginning
         audioSource.PlayOneShot(intro_VO[7]);
-        Guides[2].SetActive(false);
-        Guides[3].SetActive(true);
+        PlayGuide(3);
         yield return new WaitForSeconds(intro_VO[7].length);
+
         //Enable Laryngoscope
         laryngoscope.GetComponent<BoxCollider>().enabled = true;
         laryngoscope.GetComponent<Rigidbody>().useGravity = true;
@@ -114,35 +89,29 @@ public class ZoneA_GameManager : MonoBehaviour
         {
             StartCoroutine(Step1());
             ActionsCompleted[1] = true;
-            //grabbableObject2.AddComponent<OVRGrabbable>();
-            //grabbableObject2.GetComponent<OVRGrabbable>().enabled = true;
-
 
         }
-        /*if (grabbableObject2.GetComponent<OVRGrabbable>().isGrabbed == true && ActionsCompleted[2] == false)
-        {
-            StartCoroutine(Step2());
-            ActionsCompleted[2] = true;
-            //grabbableObject3.AddComponent<OVRGrabbable>();
-            // grabbableObject3.GetComponent<OVRGrabbable>().enabled = true;
-            //grabbableObject3.GetComponent<BoxCollider>().enabled = true;
-            //grabbableObject3.GetComponent<Rigidbody>().useGravity = true;
-        }
-        if (grabbableObject3.GetComponent<OVRGrabbable>().isGrabbed == true && ActionsCompleted[3] == false)
-        {
-            StartCoroutine(Step3());
-            ActionsCompleted[3] = true;
-            // grabbableObject4.AddComponent<OVRGrabbable>();
-            // grabbableObject4.GetComponent<OVRGrabbable>().enabled = true;
-            //grabbableObject4.GetComponent<BoxCollider>().enabled = true;
-            //grabbableObject4.GetComponent<Rigidbody>().useGravity = true;
-        }
-        if (grabbableObject4.GetComponent<OVRGrabbable>().isGrabbed == true && ActionsCompleted[4] == false)
+        if (endotrachealTube.GetComponent<OVRGrabbable>().isGrabbed == true && ActionsCompleted[2] == false)
         {
             StartCoroutine(Step4());
+            ActionsCompleted[2] = true;
+        }
+        if (syringe.GetComponent<OVRGrabbable>().isGrabbed == true && ActionsCompleted[3] == false)
+        {
+            StartCoroutine(Step5());
+            ActionsCompleted[3] = true;
+        }
+        if (laryngoscope.GetComponent<OVRGrabbable>().isGrabbed == true && ActionsCompleted[4] == false && step1Completed == true)
+        {
+            StartCoroutine(Step7());
             ActionsCompleted[4] = true;
+        }
+        if (inflatingBag.GetComponent<OVRGrabbable>().isGrabbed == true && ActionsCompleted[5] == false)
+        {
+            StartCoroutine(Step9());
+            ActionsCompleted[5] = true;
+        }
 
-        }*/
     }
 
     void InitializeDefaultData()
@@ -181,58 +150,147 @@ public class ZoneA_GameManager : MonoBehaviour
     }
 
 
+    void PlayGuide(int guideNo)
+    {       
+        if(guideNo >= 0)
+        {
+            //Disable previous guide
+            Guides[guideNo - 1].SetActive(false);
+            //Enable current guide
+            Guides[guideNo].SetActive(true);
+        }
+        else
+            Guides[guideNo].SetActive(true);
+    }
+
     IEnumerator Step1()
     {
-
-        // Step 1
-        Guides[3].SetActive(false);
-        Guides[4].SetActive(true);
+        // Step 1 Pick laryngoscope and insert
+        PlayGuide(4);
         yield return new WaitForSeconds(3f);
-        Guides[4].SetActive(false);
-        Guides[5].SetActive(true);
+        PlayGuide(5);
         yield return new WaitForSeconds(3f);
 
+        step1Completed = true;
 
-        //Enable Next GrabbableObject
-        //grabbableObject2.GetComponent<BoxCollider>().enabled = true;
-        //grabbableObject2.GetComponent<Rigidbody>().useGravity = true;
-
+        StartCoroutine(Step2());
     }
 
      IEnumerator Step2()
     {
-        // Step 2
-        audioSource.PlayOneShot(intro_VO[1]);
-        Guides[0].SetActive(false);
-        Guides[1].SetActive(true);
-        yield return new WaitForSeconds(intro_VO[1].length);
+        // Step 2 Raise Epiglottis
+        audioSource.PlayOneShot(intro_VO[8]);
+        PlayGuide(6);
+        yield return new WaitForSeconds(intro_VO[8].length);
 
-        //Enable Next GrabbableObject
-        //grabbableObject3.GetComponent<BoxCollider>().enabled = true;
-        //grabbableObject3.GetComponent<Rigidbody>().useGravity = true;
+
+        //Raise Epiglottis
+        yield return new WaitForSeconds(3f);
+
+        StartCoroutine(Step3());
     }
 
     IEnumerator Step3()
     {
-        // Step 2
-        audioSource.PlayOneShot(intro_VO[2]);
-        Guides[1].SetActive(false);
-        Guides[2].SetActive(true);
-        yield return new WaitForSeconds(intro_VO[2].length);
+        // Step 3  Highlight and pick Endotracheal tube
+        audioSource.PlayOneShot(intro_VO[9]);
+        PlayGuide(7);
+        yield return new WaitForSeconds(intro_VO[9].length);
 
-        //Enable Next GrabbableObject
-        //grabbableObject4.GetComponent<BoxCollider>().enabled = true;
-        //grabbableObject4.GetComponent<Rigidbody>().useGravity = true;
+        //Enable Endotracheal Tube
+        endotrachealTube.GetComponent<BoxCollider>().enabled = true;
+        endotrachealTube.GetComponent<Rigidbody>().useGravity = true;
     }
 
     IEnumerator Step4()
     {
-        // Step 2
-        audioSource.PlayOneShot(intro_VO[3]);
-        Guides[2].SetActive(false);
-        Guides[3].SetActive(true);
-        yield return new WaitForSeconds(intro_VO[3].length);
+        // Step 4 Insert endotracheal tube. Pick syringe.
+        audioSource.PlayOneShot(intro_VO[10]);
+        yield return new WaitForSeconds(intro_VO[10].length);
 
-        //Enable Next GrabbableObject
+        PlayGuide(8);
+        yield return new WaitForSeconds(5f);
+
+        //enable Syringe
+        syringe.GetComponent<BoxCollider>().enabled = true;
+        syringe.GetComponent<Rigidbody>().useGravity = true;
+    }
+
+    IEnumerator Step5()
+    {
+        // Step 5 Blow balloon
+        audioSource.PlayOneShot(intro_VO[11]);
+        PlayGuide(9);
+        yield return new WaitForSeconds(intro_VO[11].length);
+        yield return new WaitForSeconds(3);
+
+        StartCoroutine(Step6());
+    }
+
+    IEnumerator Step6()
+    {
+        // Step 6 Remove Laryngoscope 1/2
+        audioSource.PlayOneShot(intro_VO[12]);
+        PlayGuide(10);
+        yield return new WaitForSeconds(intro_VO[12].length);
+    }
+
+    IEnumerator Step7()
+    {
+        // Step 7 Remove Laryngoscope 2/2
+        audioSource.PlayOneShot(intro_VO[13]);
+        PlayGuide(11);
+        yield return new WaitForSeconds(intro_VO[13].length);
+
+        StartCoroutine(Step8());
+    }
+
+    IEnumerator Step8()
+    {
+        // Step 8 highlight Inflating Bag
+        audioSource.PlayOneShot(intro_VO[14]);
+        PlayGuide(12);
+        yield return new WaitForSeconds(intro_VO[13].length);
+
+        // Enable inflating Bag
+        inflatingBag.GetComponent<BoxCollider>().enabled = true;
+        inflatingBag.GetComponent<Rigidbody>().useGravity = true;
+    }
+
+    IEnumerator Step9()
+    {
+        // Step 9 Blow Inflating Bag
+        PlayGuide(13);
+        yield return new WaitForSeconds(3f);
+        //blow bag
+        //
+        audioSource.PlayOneShot(intro_VO[15]);
+        PlayGuide(14);
+        yield return new WaitForSeconds(intro_VO[15].length);
+
+        //Play Lung Sound (NOT ADDED YET)
+        //
+        PlayGuide(15);
+        yield return new WaitForSeconds(3);
+
+        audioSource.PlayOneShot(intro_VO[16]);
+        yield return new WaitForSeconds(intro_VO[16].length);
+
+        audioSource.PlayOneShot(intro_VO[17]);
+        yield return new WaitForSeconds(intro_VO[17].length);
+
+        StartCoroutine(step10());
+    }
+
+    IEnumerator step10()
+    {
+        // Step 10 Attach endo-tube ti mech. ventilator
+
+        audioSource.PlayOneShot(intro_VO[18]);
+        PlayGuide(16);
+        yield return new WaitForSeconds(intro_VO[18].length);
+
+        audioSource.PlayOneShot(intro_VO[19]);
+        yield return new WaitForSeconds(intro_VO[19].length);
     }
 }
