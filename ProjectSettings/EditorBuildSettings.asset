@@ -5,13 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/Nursing Procedures/Blood Transfusion/Scenes/SampleScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 0
     path: Assets/Nursing Procedures/Intubation & Mechanical Ventilation/Scenes/Intubation_&_Mechanical_Ventilation.unity
     guid: 8a4cd18fb1219634bb0a89a755d3b65e
-  - enabled: 1
+  - enabled: 0
     path: Assets/Nursing Procedures/RT Insertion/Scenes/RT Insertion.unity
     guid: 9377373a3ed8977458673f66107d6dbe
   m_configObjects: {}
