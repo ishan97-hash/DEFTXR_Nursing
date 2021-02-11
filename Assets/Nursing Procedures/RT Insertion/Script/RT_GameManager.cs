@@ -55,7 +55,8 @@ public class RT_GameManager : MonoBehaviour
     private GameObject SCISSOR;
 
 
-
+    public GameObject character_animation;
+    public GameObject bed_animation;
 
     private void Start()
     {
@@ -102,17 +103,24 @@ public class RT_GameManager : MonoBehaviour
         yield return new WaitForSeconds(intro_VO[6].length);
         yield return new WaitForSeconds(3f);
 
+        //wash Hands
         audioSource.PlayOneShot(intro_VO[7]);
         Guides[2].SetActive(false);
         Guides[3].SetActive(true);
         yield return new WaitForSeconds(intro_VO[7].length);
         yield return new WaitForSeconds(3f);
+        //character_animation.GetComponent<Animator>().Play("Getup_idle_clone");
+        yield return new WaitForSeconds(3f);
+
 
         audioSource.PlayOneShot(intro_VO[8]);
         yield return new WaitForSeconds(intro_VO[8].length);
 
+        character_animation.GetComponent<Animator>().Play("Getup_idle_clone");
+        bed_animation.GetComponent<Animator>().Play("Bed_mattressRotation_clone");
+
         //Enable NASOGASTRIC_TUBE
-        NASOGASTRIC_TUBE.GetComponent<BoxCollider>().enabled = true;
+        NASOGASTRIC_TUBE.GetComponent<MeshCollider>().enabled = true;
         NASOGASTRIC_TUBE.GetComponent<Rigidbody>().useGravity = true;
 
     }
@@ -157,10 +165,10 @@ public class RT_GameManager : MonoBehaviour
         //Disable all Interactables/Grabbable property of GrabbableObjects, except 1st
 
         // 1) Disable all Box Colliders to avoid getting grabbed.
-        NASOGASTRIC_TUBE.GetComponent<BoxCollider>().enabled = false;
+        NASOGASTRIC_TUBE.GetComponent<MeshCollider>().enabled = false;
         FT_NG_TUBE.GetComponent<BoxCollider>().enabled = false;
         WATER_SOLUBLE_LUBRICANT.GetComponent<BoxCollider>().enabled = false;
-        GLASS_OF_WATER.GetComponent<BoxCollider>().enabled = false;
+        GLASS_OF_WATER.GetComponent<MeshCollider>().enabled = false;
         TAPE.GetComponent<BoxCollider>().enabled = false;
         SYRINGE.GetComponent<BoxCollider>().enabled = false;
         TOWEL.GetComponent<BoxCollider>().enabled = false;
