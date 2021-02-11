@@ -73,7 +73,7 @@ public class RT_GameManager : MonoBehaviour
         audioSource.PlayOneShot(intro_VO[0]);
         Guides[0].SetActive(true);
         yield return new WaitForSeconds(intro_VO[0].length);
-
+        
         audioSource.PlayOneShot(intro_VO[1]);
         Guides[0].SetActive(true);
         yield return new WaitForSeconds(intro_VO[1].length);
