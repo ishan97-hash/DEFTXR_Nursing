@@ -612,6 +612,8 @@ MonoBehaviour:
   SCISSOR: {fileID: 13690088}
   character_animation: {fileID: 919132148348545345}
   bed_animation: {fileID: 919132147679010613}
+  pushHand_animation: {fileID: 1183260351}
+  washHand_animation: {fileID: 1638246809}
 --- !u!82 &619043525 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 7240538281104750739, guid: eadf055ba2730cf40aad73fc09c04817,
@@ -1560,6 +1562,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1418911989}
+  - component: {fileID: 1418911990}
   - component: {fileID: 1418911988}
   m_Layer: 0
   m_Name: Hand_transparent_closed_parent
@@ -1578,7 +1581,7 @@ Animator:
   m_GameObject: {fileID: 1418911987}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: bbc1450e1d4833748b294162bbaf5390, type: 2}
+  m_Controller: {fileID: 9100000, guid: 0613b3de1202e4247b7101bfef257725, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1602,6 +1605,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: -90.00001, z: -38.151}
+--- !u!111 &1418911990
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1418911987}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 859a600db8619ef41a042bce8bd08459, type: 2}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &1491001095
 GameObject:
   m_ObjectHideFlags: 0
@@ -3135,6 +3153,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7017548545031449121, guid: 7154f8e18fe0f1846b8e0512f1c4516d,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 1ef683d98e0f6f24a9627817f82c462d, type: 2}
     - target: {fileID: 7415720244785121970, guid: 7154f8e18fe0f1846b8e0512f1c4516d,
         type: 3}
       propertyPath: m_RootOrder

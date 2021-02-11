@@ -57,6 +57,8 @@ public class RT_GameManager : MonoBehaviour
 
     public GameObject character_animation;
     public GameObject bed_animation;
+    public GameObject pushHand_animation;
+    public GameObject washHand_animation;
 
     private void Start()
     {
@@ -108,8 +110,8 @@ public class RT_GameManager : MonoBehaviour
         Guides[2].SetActive(false);
         Guides[3].SetActive(true);
         yield return new WaitForSeconds(intro_VO[7].length);
-        yield return new WaitForSeconds(3f);
-        //character_animation.GetComponent<Animator>().Play("Getup_idle_clone");
+        pushHand_animation.GetComponent<Animator>().Play("Hand_push_anim_clone");
+        washHand_animation.GetComponent<Animator>().Play("Hand_wash_anim_clone");
         yield return new WaitForSeconds(3f);
 
 
@@ -117,6 +119,7 @@ public class RT_GameManager : MonoBehaviour
         yield return new WaitForSeconds(intro_VO[8].length);
 
         character_animation.GetComponent<Animator>().Play("Getup_idle_clone");
+        yield return new WaitForSeconds(2f);
         bed_animation.GetComponent<Animator>().Play("Bed_mattressRotation_clone");
 
         //Enable NASOGASTRIC_TUBE
