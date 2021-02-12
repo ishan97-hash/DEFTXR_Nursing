@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0513c61f080b4fe4ba3fbc970fd2367e
+guid: 4c1903a0513a46f4ab1375b95da17fd9
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
@@ -7,13 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Character_Male_Eyes_M
-    second: {fileID: 2100000, guid: c64a992afa7e1404ba8e1b9520e29b54, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Character_Male_M
-    second: {fileID: 2100000, guid: e71696c04174d2842be1222387f8c975, type: 2}
+      name: NGTube_measure_M
+    second: {fileID: 2100000, guid: 10b5d0b69d5e78848a13b4f4a555347d, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
@@ -78,15 +73,7 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
-  referencedClips:
-  - a6a63edcf4f1cd54ab3bb8306d0a7ef9
-  - 4dee7ecf8506d804b9db3e60381ee1a6
-  - 5237da2d72fe69b46b720635f681042f
-  - 104bf1626f48a964a91ba8c837b8e5a2
-  - 666f34662506e664aa87d6c786dd297d
-  - 773d4e3accf5b7b46adf28be26f1288c
-  - 52ed2154834f7964380517742ba9844f
-  - 8be6dee9d0fe6b249a0ade7cfd6b3458
+  referencedClips: []
   importAnimation: 1
   humanDescription:
     serializedVersion: 3
@@ -102,11 +89,11 @@ ModelImporter:
     globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
-    hasExtraRoot: 1
+    hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
-  animationType: 1
+  animationType: 2
   humanoidOversampling: 1
   avatarSetup: 0
   additionalBone: 0
