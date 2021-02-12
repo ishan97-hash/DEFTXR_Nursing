@@ -32,25 +32,13 @@ public class RT_GameManager : MonoBehaviour
     [SerializeField]
     private GameObject NASOGASTRIC_TUBE;
     [SerializeField]
-    private GameObject FT_NG_TUBE;
-    [SerializeField]
     private GameObject WATER_SOLUBLE_LUBRICANT;
     [SerializeField]
     private GameObject GLASS_OF_WATER;
     [SerializeField]
     private GameObject TAPE;
     [SerializeField]
-    private GameObject SYRINGE;
-    [SerializeField]
-    private GameObject TOWEL;
-    [SerializeField]
     private GameObject EMESIS_BASIN;
-    [SerializeField]
-    private GameObject STETHOSCOPE;
-    [SerializeField]
-    private GameObject CLEAN_GLOVE;
-    [SerializeField]
-    private GameObject FLASHLIGHT;
     [SerializeField]
     private GameObject SCISSOR;
 
@@ -62,8 +50,8 @@ public class RT_GameManager : MonoBehaviour
 
     private void Start()
     {
-
-        InitializeDefaultData();
+        
+       InitializeDefaultData();
 
         StartCoroutine(Introduction());
     }
@@ -73,54 +61,58 @@ public class RT_GameManager : MonoBehaviour
         // Introduction
         Debug.Log("playing vo1");
         audioSource.PlayOneShot(intro_VO[0]);
-        Guides[0].SetActive(true);
         yield return new WaitForSeconds(intro_VO[0].length);
         
         audioSource.PlayOneShot(intro_VO[1]);
-        Guides[0].SetActive(true);
         yield return new WaitForSeconds(intro_VO[1].length);
 
         Debug.Log("playing vo2");
         audioSource.PlayOneShot(intro_VO[2]);
         yield return new WaitForSeconds(intro_VO[2].length);
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(4f);
 
         audioSource.PlayOneShot(intro_VO[3]);
-        Guides[0].SetActive(false);
-        Guides[1].SetActive(true);
         yield return new WaitForSeconds(intro_VO[3].length);
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(3f);
 
         //Show Apparatus
         audioSource.PlayOneShot(intro_VO[4]);
-        Guides[1].SetActive(false);
-        Guides[2].SetActive(true);
         yield return new WaitForSeconds(intro_VO[4].length);
         yield return new WaitForSeconds(4f);
 
         audioSource.PlayOneShot(intro_VO[5]);
+        Guides[0].SetActive(true);
         yield return new WaitForSeconds(intro_VO[5].length);
-
         audioSource.PlayOneShot(intro_VO[6]);
         yield return new WaitForSeconds(intro_VO[6].length);
-        yield return new WaitForSeconds(3f);
-
-        //wash Hands
+        Guides[0].SetActive(false);
+        yield return new WaitForSeconds(1f);
         audioSource.PlayOneShot(intro_VO[7]);
-        Guides[2].SetActive(false);
-        Guides[3].SetActive(true);
+        character_animation.GetComponent<Animator>().Play("Eyeblink_Talk_clone");
         yield return new WaitForSeconds(intro_VO[7].length);
+
+        //wash Handswash
+        audioSource.PlayOneShot(intro_VO[8]);
+        Guides[1].SetActive(true);
+        yield return new WaitForSeconds(intro_VO[8].length);
         pushHand_animation.GetComponent<Animator>().Play("Hand_push_anim_clone");
         washHand_animation.GetComponent<Animator>().Play("Hand_wash_anim_clone");
         yield return new WaitForSeconds(3f);
+        Guides[1].SetActive(false);
+        yield return new WaitForSeconds(5f);
+        
 
 
-        audioSource.PlayOneShot(intro_VO[8]);
-        yield return new WaitForSeconds(intro_VO[8].length);
-
+        audioSource.PlayOneShot(intro_VO[9]);
+        Guides[2].SetActive(true);
+        yield return new WaitForSeconds(intro_VO[9].length);
         character_animation.GetComponent<Animator>().Play("Getup_idle_clone");
-        yield return new WaitForSeconds(2f);
-        bed_animation.GetComponent<Animator>().Play("Bed_mattressRotation_clone");
+        yield return new WaitForSeconds(3f);
+        bed_animation.GetComponent<Animator>().Play("Mattress_rotation2_clone");
+        yield return new WaitForSeconds(3f);
+        character_animation.GetComponent<Animator>().Play("Leaning_back_clone");
+        yield return new WaitForSeconds(3f);
+        Guides[2].SetActive(false);
 
         //Enable NASOGASTRIC_TUBE
         NASOGASTRIC_TUBE.GetComponent<MeshCollider>().enabled = true;
@@ -160,7 +152,7 @@ public class RT_GameManager : MonoBehaviour
         // Disable all models
         //patient.SetActive(false);
 
-        for (int i = 0; i < Guides.Count; i++)
+       for (int i = 0; i < Guides.Count; i++)
         {
             Guides[i].SetActive(false);
         }
@@ -169,30 +161,19 @@ public class RT_GameManager : MonoBehaviour
 
         // 1) Disable all Box Colliders to avoid getting grabbed.
         NASOGASTRIC_TUBE.GetComponent<MeshCollider>().enabled = false;
-        FT_NG_TUBE.GetComponent<BoxCollider>().enabled = false;
-        WATER_SOLUBLE_LUBRICANT.GetComponent<BoxCollider>().enabled = false;
+        
+        WATER_SOLUBLE_LUBRICANT.GetComponent<MeshCollider>().enabled = false;
         GLASS_OF_WATER.GetComponent<MeshCollider>().enabled = false;
-        TAPE.GetComponent<BoxCollider>().enabled = false;
-        SYRINGE.GetComponent<BoxCollider>().enabled = false;
-        TOWEL.GetComponent<BoxCollider>().enabled = false;
-        EMESIS_BASIN.GetComponent<BoxCollider>().enabled = false;
-        STETHOSCOPE.GetComponent<BoxCollider>().enabled = false;
-        CLEAN_GLOVE.GetComponent<BoxCollider>().enabled = false;
-        FLASHLIGHT.GetComponent<BoxCollider>().enabled = false;
-        SCISSOR.GetComponent<BoxCollider>().enabled = false;
+        TAPE.GetComponent<MeshCollider>().enabled = false;
+        EMESIS_BASIN.GetComponent<MeshCollider>().enabled = false;
+        SCISSOR.GetComponent<MeshCollider>().enabled = false;
 
         // 2) Disable all Gravity since Box Colliders are off
         NASOGASTRIC_TUBE.GetComponent<Rigidbody>().useGravity = false;
-        FT_NG_TUBE.GetComponent<Rigidbody>().useGravity = false;
         WATER_SOLUBLE_LUBRICANT.GetComponent<Rigidbody>().useGravity = false;
         GLASS_OF_WATER.GetComponent<Rigidbody>().useGravity = false;
         TAPE.GetComponent<Rigidbody>().useGravity = false;
-        SYRINGE.GetComponent<Rigidbody>().useGravity = false;
-        TOWEL.GetComponent<Rigidbody>().useGravity = false;
         EMESIS_BASIN.GetComponent<Rigidbody>().useGravity = false;
-        STETHOSCOPE.GetComponent<Rigidbody>().useGravity = false;
-        CLEAN_GLOVE.GetComponent<Rigidbody>().useGravity = false;
-        FLASHLIGHT.GetComponent<Rigidbody>().useGravity = false;
         SCISSOR.GetComponent<Rigidbody>().useGravity = false;
 
     }
@@ -202,8 +183,8 @@ public class RT_GameManager : MonoBehaviour
     {
         // STEP 1 Pick Nasogastric Tube
 
-        audioSource.PlayOneShot(intro_VO[9]);
-        yield return new WaitForSeconds(intro_VO[9].length);
+        audioSource.PlayOneShot(intro_VO[10]);
+        yield return new WaitForSeconds(intro_VO[10].length);
         yield return new WaitForSeconds(4f);
 
         StartCoroutine(Step2());
@@ -213,8 +194,8 @@ public class RT_GameManager : MonoBehaviour
     {
         // step 2 Highlight Tape and Attach to Nasogastric Tube
 
-        audioSource.PlayOneShot(intro_VO[10]);
-        yield return new WaitForSeconds(intro_VO[10].length);
+        audioSource.PlayOneShot(intro_VO[11]);
+        yield return new WaitForSeconds(intro_VO[11].length);
 
         // Enable Tape
 
@@ -226,14 +207,14 @@ public class RT_GameManager : MonoBehaviour
     {
        // Step 3 Highlight Water Soluble Lubricant
 
-        audioSource.PlayOneShot(intro_VO[11]);
-        yield return new WaitForSeconds(intro_VO[11].length);
+        audioSource.PlayOneShot(intro_VO[12]);
+        yield return new WaitForSeconds(intro_VO[12].length);
         yield return new WaitForSeconds(4f);
 
         // Lubricate about 2 – 4 inches of the tube with a lubricant
 
-        audioSource.PlayOneShot(intro_VO[12]);
-        yield return new WaitForSeconds(intro_VO[12].length);
+        audioSource.PlayOneShot(intro_VO[13]);
+        yield return new WaitForSeconds(intro_VO[13].length);
 
         // Enable water Soluble Lubricant
 
@@ -245,20 +226,20 @@ public class RT_GameManager : MonoBehaviour
     {
         // step 4 Pick Glass Of Water 
 
-        audioSource.PlayOneShot(intro_VO[13]);
-        yield return new WaitForSeconds(intro_VO[13].length);
+        audioSource.PlayOneShot(intro_VO[14]);
+        yield return new WaitForSeconds(intro_VO[14].length);
         yield return new WaitForSeconds(3f);
         
         // Have a patient to take sip of water 
 
-        audioSource.PlayOneShot(intro_VO[14]);
-        yield return new WaitForSeconds(intro_VO[14].length);
+        audioSource.PlayOneShot(intro_VO[15]);
+        yield return new WaitForSeconds(intro_VO[15].length);
         yield return new WaitForSeconds(3f);
 
         // Secure Tube in Place 
 
-        audioSource.PlayOneShot(intro_VO[15]);
-        yield return new WaitForSeconds(intro_VO[15].length);
+        audioSource.PlayOneShot(intro_VO[16]);
+        yield return new WaitForSeconds(intro_VO[16].length);
 
         // Enable Glass Of Water
 
