@@ -172,6 +172,7 @@ public class ZoneA_GameManager : MonoBehaviour
         yield return new WaitForSeconds(3f);
 
         step1Completed = true;
+        
 
         StartCoroutine(Step2());
     }

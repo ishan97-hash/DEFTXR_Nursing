@@ -32,6 +32,10 @@ public class RT_GameManager : MonoBehaviour
     [SerializeField]
     private GameObject NASOGASTRIC_TUBE;
     [SerializeField]
+    private GameObject MEASURE_TUBE;
+    [SerializeField]
+    private GameObject FIX_NASOGASTRIC_TUBE;
+    [SerializeField]
     private GameObject WATER_SOLUBLE_LUBRICANT;
     [SerializeField]
     private GameObject GLASS_OF_WATER;
@@ -47,14 +51,18 @@ public class RT_GameManager : MonoBehaviour
     public GameObject bed_animation;
     public GameObject pushHand_animation;
     public GameObject washHand_animation;
+    public GameObject measure_animation;
+    public GameObject tube_insert_animation;
+    public GameObject water_animation;
 
     private void Start()
     {
-        
-       InitializeDefaultData();
+
+        InitializeDefaultData();
 
         StartCoroutine(Introduction());
     }
+
 
     IEnumerator Introduction()
     {
@@ -62,7 +70,7 @@ public class RT_GameManager : MonoBehaviour
         Debug.Log("playing vo1");
         audioSource.PlayOneShot(intro_VO[0]);
         yield return new WaitForSeconds(intro_VO[0].length);
-        
+
         audioSource.PlayOneShot(intro_VO[1]);
         yield return new WaitForSeconds(intro_VO[1].length);
 
@@ -94,13 +102,17 @@ public class RT_GameManager : MonoBehaviour
         //wash Handswash
         audioSource.PlayOneShot(intro_VO[8]);
         Guides[1].SetActive(true);
+        pushHand_animation.SetActive(true);
+        washHand_animation.SetActive(true);
         yield return new WaitForSeconds(intro_VO[8].length);
         pushHand_animation.GetComponent<Animator>().Play("Hand_push_anim_clone");
         washHand_animation.GetComponent<Animator>().Play("Hand_wash_anim_clone");
         yield return new WaitForSeconds(3f);
+        pushHand_animation.SetActive(false);
+        washHand_animation.SetActive(false);
         Guides[1].SetActive(false);
         yield return new WaitForSeconds(5f);
-        
+
 
 
         audioSource.PlayOneShot(intro_VO[9]);
@@ -113,9 +125,9 @@ public class RT_GameManager : MonoBehaviour
         character_animation.GetComponent<Animator>().Play("Leaning_back_clone");
         yield return new WaitForSeconds(3f);
         Guides[2].SetActive(false);
-
+        Guides[3].SetActive(true);
         //Enable NASOGASTRIC_TUBE
-        NASOGASTRIC_TUBE.GetComponent<MeshCollider>().enabled = true;
+        NASOGASTRIC_TUBE.GetComponent<BoxCollider>().enabled = true;
         NASOGASTRIC_TUBE.GetComponent<Rigidbody>().useGravity = true;
 
     }
@@ -124,24 +136,39 @@ public class RT_GameManager : MonoBehaviour
     {
         if (NASOGASTRIC_TUBE.GetComponent<OVRGrabbable>().isGrabbed == true && ActionsCompleted[1] == false)
         {
+            Guides[3].SetActive(false);
+            Guides[4].SetActive(true);
+            MEASURE_TUBE.SetActive(true);
+            measure_animation.SetActive(true);
             StartCoroutine(Step1());
             ActionsCompleted[1] = true;
+            TAPE.GetComponent<BoxCollider>().enabled = true;
+            TAPE.GetComponent<Rigidbody>().useGravity = true; 
         }
 
         if (TAPE.GetComponent<OVRGrabbable>().isGrabbed == true && ActionsCompleted[2] == false)
         {
+            Guides[11].SetActive(false);
             StartCoroutine(Step2());
             ActionsCompleted[2] = true;
+
+            WATER_SOLUBLE_LUBRICANT.GetComponent<BoxCollider>().enabled = true;
+            WATER_SOLUBLE_LUBRICANT.GetComponent<Rigidbody>().useGravity = true;
         }
 
-        if(WATER_SOLUBLE_LUBRICANT.GetComponent<OVRGrabbable>().isGrabbed == true && ActionsCompleted[3] == false)
+        if (WATER_SOLUBLE_LUBRICANT.GetComponent<OVRGrabbable>().isGrabbed == true && ActionsCompleted[3] == false)
         {
+            Guides[12].SetActive(false);
             StartCoroutine(Step3());
             ActionsCompleted[3] = true;
+
+            GLASS_OF_WATER.GetComponent<BoxCollider>().enabled = true;
+            GLASS_OF_WATER.GetComponent<Rigidbody>().useGravity = true;
         }
 
         if (GLASS_OF_WATER.GetComponent<OVRGrabbable>().isGrabbed == true && ActionsCompleted[4] == false)
         {
+            Guides[15].SetActive(false);
             StartCoroutine(Step4());
             ActionsCompleted[4] = true;
         }
@@ -152,7 +179,7 @@ public class RT_GameManager : MonoBehaviour
         // Disable all models
         //patient.SetActive(false);
 
-       for (int i = 0; i < Guides.Count; i++)
+        for (int i = 0; i < Guides.Count; i++)
         {
             Guides[i].SetActive(false);
         }
@@ -160,13 +187,13 @@ public class RT_GameManager : MonoBehaviour
         //Disable all Interactables/Grabbable property of GrabbableObjects, except 1st
 
         // 1) Disable all Box Colliders to avoid getting grabbed.
-        NASOGASTRIC_TUBE.GetComponent<MeshCollider>().enabled = false;
-        
-        WATER_SOLUBLE_LUBRICANT.GetComponent<MeshCollider>().enabled = false;
-        GLASS_OF_WATER.GetComponent<MeshCollider>().enabled = false;
-        TAPE.GetComponent<MeshCollider>().enabled = false;
-        EMESIS_BASIN.GetComponent<MeshCollider>().enabled = false;
-        SCISSOR.GetComponent<MeshCollider>().enabled = false;
+        NASOGASTRIC_TUBE.GetComponent<BoxCollider>().enabled = false;
+
+        WATER_SOLUBLE_LUBRICANT.GetComponent<BoxCollider>().enabled = false;
+        GLASS_OF_WATER.GetComponent<BoxCollider>().enabled = false;
+        TAPE.GetComponent<BoxCollider>().enabled = false;
+        EMESIS_BASIN.GetComponent<BoxCollider>().enabled = false;
+        SCISSOR.GetComponent<BoxCollider>().enabled = false;
 
         // 2) Disable all Gravity since Box Colliders are off
         NASOGASTRIC_TUBE.GetComponent<Rigidbody>().useGravity = false;
@@ -178,72 +205,87 @@ public class RT_GameManager : MonoBehaviour
 
     }
 
+   
 
     IEnumerator Step1()
     {
         // STEP 1 Pick Nasogastric Tube
 
-        audioSource.PlayOneShot(intro_VO[10]);
+        audioSource.PlayOneShot(intro_VO[10]); 
+        measure_animation.GetComponent<Animator>().Play("Hand_measure");
         yield return new WaitForSeconds(intro_VO[10].length);
-        yield return new WaitForSeconds(4f);
-
-        StartCoroutine(Step2());
+        Guides[4].SetActive(false);
+        MEASURE_TUBE.SetActive(false);
+        measure_animation.SetActive(false);
+        Guides[11].SetActive(true);
     }
 
     IEnumerator Step2()
     {
         // step 2 Highlight Tape and Attach to Nasogastric Tube
-
+        Guides[5].SetActive(true);
         audioSource.PlayOneShot(intro_VO[11]);
         yield return new WaitForSeconds(intro_VO[11].length);
-
-        // Enable Tape
-
-        TAPE.GetComponent<BoxCollider>().enabled = true;
-        TAPE.GetComponent<Rigidbody>().useGravity = true;
+        Guides[5].SetActive(false);
+        Guides[13].SetActive(true);
+        yield return new WaitForSeconds(4f);
+        Guides[13].SetActive(false);
+        Guides[12].SetActive(true);
     }
 
     IEnumerator Step3()
     {
-       // Step 3 Highlight Water Soluble Lubricant
-
+        // Step 3 Highlight Water Soluble Lubricant
+        // Lubricate about 2 – 4 inches of the tube with a lubricant
+        Guides[6].SetActive(true);
         audioSource.PlayOneShot(intro_VO[12]);
         yield return new WaitForSeconds(intro_VO[12].length);
+        Guides[6].SetActive(false);
         yield return new WaitForSeconds(4f);
 
-        // Lubricate about 2 – 4 inches of the tube with a lubricant
+        // play insert tube animation
 
+        Guides[7].SetActive(true);
         audioSource.PlayOneShot(intro_VO[13]);
+        measure_animation.SetActive(true);
+        measure_animation.GetComponent<Animator>().Play("Hand_insertTube_movement");
+        character_animation.GetComponent<Animator>().Play("Rising_head_forTubeInsertion_clone");
         yield return new WaitForSeconds(intro_VO[13].length);
+        Guides[7].SetActive(false);
+        yield return new WaitForSeconds(4f);
 
-        // Enable water Soluble Lubricant
+        Guides[8].SetActive(true);
+        audioSource.PlayOneShot(intro_VO[14]);
+        yield return new WaitForSeconds(intro_VO[14].length);
+        Guides[8].SetActive(false);
+        yield return new WaitForSeconds(2f);
 
-        WATER_SOLUBLE_LUBRICANT.GetComponent<BoxCollider>().enabled = true;
-        WATER_SOLUBLE_LUBRICANT.GetComponent<Rigidbody>().useGravity = true;
+        Guides[15].SetActive(true);
+        yield return new WaitForSeconds(2f);
+
     }
 
     IEnumerator Step4()
     {
-        // step 4 Pick Glass Of Water 
 
-        audioSource.PlayOneShot(intro_VO[14]);
-        yield return new WaitForSeconds(intro_VO[14].length);
-        yield return new WaitForSeconds(3f);
-        
-        // Have a patient to take sip of water 
-
+        Guides[9].SetActive(true);
         audioSource.PlayOneShot(intro_VO[15]);
+        character_animation.GetComponent<Animator>().Play("Drinking_water_after_Discomfort_clone");
         yield return new WaitForSeconds(intro_VO[15].length);
+
+        Guides[9].SetActive(false);
         yield return new WaitForSeconds(3f);
 
-        // Secure Tube in Place 
+        Guides[14].SetActive(true);
+       // measure_animation.SetActive(true);
+       // measure_animation.GetComponent<Animator>().Play("Hand_insertTube_movement");
+        yield return new WaitForSeconds(3f);
+        Guides[14].SetActive(false);
 
+        Guides[10].SetActive(true);
         audioSource.PlayOneShot(intro_VO[16]);
         yield return new WaitForSeconds(intro_VO[16].length);
+        Guides[10].SetActive(false);
 
-        // Enable Glass Of Water
-
-        GLASS_OF_WATER.GetComponent<BoxCollider>().enabled = true;
-        GLASS_OF_WATER.GetComponent<Rigidbody>().useGravity = true;
     }
 }
