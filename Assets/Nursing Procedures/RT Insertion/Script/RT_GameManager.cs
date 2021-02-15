@@ -133,7 +133,7 @@ public class RT_GameManager : MonoBehaviour
         Guides[2].SetActive(false);
         Guides[3].SetActive(true);
         //Enable NASOGASTRIC_TUBE
-        NASOGASTRIC_TUBE.GetComponent<BoxCollider>().enabled = true;
+        NASOGASTRIC_TUBE.GetComponent<MeshCollider>().enabled = true;
         NASOGASTRIC_TUBE.GetComponent<Rigidbody>().useGravity = true;
 
     }
@@ -150,7 +150,7 @@ public class RT_GameManager : MonoBehaviour
             StartCoroutine(Step1());
             ActionsCompleted[1] = true;
 
-            TAPE.GetComponent<BoxCollider>().enabled = true;
+            TAPE.GetComponent<MeshCollider>().enabled = true;
             TAPE.GetComponent<Rigidbody>().useGravity = true; 
         }
 
@@ -161,7 +161,7 @@ public class RT_GameManager : MonoBehaviour
             StartCoroutine(Step2());
             ActionsCompleted[2] = true;
 
-            WATER_SOLUBLE_LUBRICANT.GetComponent<BoxCollider>().enabled = true;
+            WATER_SOLUBLE_LUBRICANT.GetComponent<MeshCollider>().enabled = true;
             WATER_SOLUBLE_LUBRICANT.GetComponent<Rigidbody>().useGravity = true;
         }
 
@@ -172,7 +172,7 @@ public class RT_GameManager : MonoBehaviour
             StartCoroutine(Step3());
             ActionsCompleted[3] = true;
 
-            GLASS_OF_WATER.GetComponent<BoxCollider>().enabled = true;
+            GLASS_OF_WATER.GetComponent<MeshCollider>().enabled = true;
             GLASS_OF_WATER.GetComponent<Rigidbody>().useGravity = true;
         }
 
@@ -198,22 +198,18 @@ public class RT_GameManager : MonoBehaviour
         //Disable all Interactables/Grabbable property of GrabbableObjects, except 1st
 
         // 1) Disable all Box Colliders to avoid getting grabbed.
-        NASOGASTRIC_TUBE.GetComponent<BoxCollider>().enabled = false;
-
-        WATER_SOLUBLE_LUBRICANT.GetComponent<BoxCollider>().enabled = false;
-        GLASS_OF_WATER.GetComponent<BoxCollider>().enabled = false;
-        TAPE.GetComponent<BoxCollider>().enabled = false;
-        //EMESIS_BASIN.GetComponent<BoxCollider>().enabled = false;
-       // SCISSOR.GetComponent<BoxCollider>().enabled = false;
+        NASOGASTRIC_TUBE.GetComponent<MeshCollider>().enabled = false;
+        WATER_SOLUBLE_LUBRICANT.GetComponent<MeshCollider>().enabled = false;
+        GLASS_OF_WATER.GetComponent<MeshCollider>().enabled = false;
+        TAPE.GetComponent<MeshCollider>().enabled = false;
+       
 
         // 2) Disable all Gravity since Box Colliders are off
         NASOGASTRIC_TUBE.GetComponent<Rigidbody>().useGravity = false;
         WATER_SOLUBLE_LUBRICANT.GetComponent<Rigidbody>().useGravity = false;
         GLASS_OF_WATER.GetComponent<Rigidbody>().useGravity = false;
         TAPE.GetComponent<Rigidbody>().useGravity = false;
-       // EMESIS_BASIN.GetComponent<Rigidbody>().useGravity = false;
-       // SCISSOR.GetComponent<Rigidbody>().useGravity = false;
-
+    
     }
 
    
