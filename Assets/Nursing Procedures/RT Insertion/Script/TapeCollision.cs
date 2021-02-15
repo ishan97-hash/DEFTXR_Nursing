@@ -8,7 +8,7 @@ public class TapeCollision : MonoBehaviour
 
     private void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.name == "go2")
+        if (col.gameObject.name == "NGTube_grabbable")
         {
             Destroy(this.gameObject);
         }
