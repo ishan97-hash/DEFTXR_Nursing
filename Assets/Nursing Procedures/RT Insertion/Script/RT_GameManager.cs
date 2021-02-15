@@ -53,7 +53,13 @@ public class RT_GameManager : MonoBehaviour
     public GameObject washHand_animation;
     public GameObject measure_animation;
     public GameObject tube_insert_animation;
-    public GameObject water_animation;
+
+    //Labels
+    public GameObject NGTUBE_Name;
+    public GameObject Tape_Name;
+    public GameObject WSL_Name;
+    public GameObject GOW_Name;
+
 
     private void Start()
     {
@@ -136,18 +142,21 @@ public class RT_GameManager : MonoBehaviour
     {
         if (NASOGASTRIC_TUBE.GetComponent<OVRGrabbable>().isGrabbed == true && ActionsCompleted[1] == false)
         {
+            NGTUBE_Name.SetActive(false); 
             Guides[3].SetActive(false);
             Guides[4].SetActive(true);
             MEASURE_TUBE.SetActive(true);
             measure_animation.SetActive(true);
             StartCoroutine(Step1());
             ActionsCompleted[1] = true;
+
             TAPE.GetComponent<BoxCollider>().enabled = true;
             TAPE.GetComponent<Rigidbody>().useGravity = true; 
         }
 
         if (TAPE.GetComponent<OVRGrabbable>().isGrabbed == true && ActionsCompleted[2] == false)
         {
+            Tape_Name.SetActive(false);
             Guides[11].SetActive(false);
             StartCoroutine(Step2());
             ActionsCompleted[2] = true;
@@ -158,6 +167,7 @@ public class RT_GameManager : MonoBehaviour
 
         if (WATER_SOLUBLE_LUBRICANT.GetComponent<OVRGrabbable>().isGrabbed == true && ActionsCompleted[3] == false)
         {
+            WSL_Name.SetActive(false);
             Guides[12].SetActive(false);
             StartCoroutine(Step3());
             ActionsCompleted[3] = true;
@@ -168,6 +178,7 @@ public class RT_GameManager : MonoBehaviour
 
         if (GLASS_OF_WATER.GetComponent<OVRGrabbable>().isGrabbed == true && ActionsCompleted[4] == false)
         {
+            GOW_Name.SetActive(false);
             Guides[15].SetActive(false);
             StartCoroutine(Step4());
             ActionsCompleted[4] = true;
@@ -192,16 +203,16 @@ public class RT_GameManager : MonoBehaviour
         WATER_SOLUBLE_LUBRICANT.GetComponent<BoxCollider>().enabled = false;
         GLASS_OF_WATER.GetComponent<BoxCollider>().enabled = false;
         TAPE.GetComponent<BoxCollider>().enabled = false;
-        EMESIS_BASIN.GetComponent<BoxCollider>().enabled = false;
-        SCISSOR.GetComponent<BoxCollider>().enabled = false;
+        //EMESIS_BASIN.GetComponent<BoxCollider>().enabled = false;
+       // SCISSOR.GetComponent<BoxCollider>().enabled = false;
 
         // 2) Disable all Gravity since Box Colliders are off
         NASOGASTRIC_TUBE.GetComponent<Rigidbody>().useGravity = false;
         WATER_SOLUBLE_LUBRICANT.GetComponent<Rigidbody>().useGravity = false;
         GLASS_OF_WATER.GetComponent<Rigidbody>().useGravity = false;
         TAPE.GetComponent<Rigidbody>().useGravity = false;
-        EMESIS_BASIN.GetComponent<Rigidbody>().useGravity = false;
-        SCISSOR.GetComponent<Rigidbody>().useGravity = false;
+       // EMESIS_BASIN.GetComponent<Rigidbody>().useGravity = false;
+       // SCISSOR.GetComponent<Rigidbody>().useGravity = false;
 
     }
 

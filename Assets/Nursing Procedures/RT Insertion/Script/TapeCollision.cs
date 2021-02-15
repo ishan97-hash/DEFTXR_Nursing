@@ -10,7 +10,7 @@ public class TapeCollision : MonoBehaviour
     {
         if (col.gameObject.name == "NGTube_grabbable")
         {
-            Destroy(this.gameObject);
+           this.gameObject.SetActive(false);
         }
     }
 }
