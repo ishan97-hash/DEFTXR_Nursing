@@ -34,6 +34,8 @@ public class RT_GameManager : MonoBehaviour
     [SerializeField]
     private GameObject MEASURE_TUBE;
     [SerializeField]
+    private GameObject Fix_Insertion_TUBE;
+    [SerializeField]
     private GameObject FIX_NASOGASTRIC_TUBE;
     [SerializeField]
     private GameObject WATER_SOLUBLE_LUBRICANT;
@@ -42,9 +44,22 @@ public class RT_GameManager : MonoBehaviour
     [SerializeField]
     private GameObject TAPE;
     [SerializeField]
+    private GameObject SmallTape;
+    [SerializeField]
     private GameObject EMESIS_BASIN;
     [SerializeField]
     private GameObject SCISSOR;
+    [SerializeField]
+    private GameObject NG_Highlighted;
+    [SerializeField]
+    private GameObject Tape_Highlighted;
+    [SerializeField]
+    private GameObject gow_Highlighted;
+    [SerializeField]
+    private GameObject wsl_Highlighted;
+    [SerializeField]
+    private GameObject smallTape_Highlighted;
+
 
 
     public GameObject character_animation;
@@ -133,7 +148,9 @@ public class RT_GameManager : MonoBehaviour
         Guides[2].SetActive(false);
         Guides[3].SetActive(true);
         //Enable NASOGASTRIC_TUBE
-        NASOGASTRIC_TUBE.GetComponent<MeshCollider>().enabled = true;
+        NG_Highlighted.SetActive(true);
+        NASOGASTRIC_TUBE.SetActive(false);
+        NASOGASTRIC_TUBE.GetComponent<BoxCollider>().enabled = true;
         NASOGASTRIC_TUBE.GetComponent<Rigidbody>().useGravity = true;
 
     }
@@ -150,7 +167,7 @@ public class RT_GameManager : MonoBehaviour
             StartCoroutine(Step1());
             ActionsCompleted[1] = true;
 
-            TAPE.GetComponent<MeshCollider>().enabled = true;
+            TAPE.GetComponent<BoxCollider>().enabled = true;
             TAPE.GetComponent<Rigidbody>().useGravity = true; 
         }
 
@@ -161,7 +178,7 @@ public class RT_GameManager : MonoBehaviour
             StartCoroutine(Step2());
             ActionsCompleted[2] = true;
 
-            WATER_SOLUBLE_LUBRICANT.GetComponent<MeshCollider>().enabled = true;
+            WATER_SOLUBLE_LUBRICANT.GetComponent<BoxCollider>().enabled = true;
             WATER_SOLUBLE_LUBRICANT.GetComponent<Rigidbody>().useGravity = true;
         }
 
@@ -172,7 +189,7 @@ public class RT_GameManager : MonoBehaviour
             StartCoroutine(Step3());
             ActionsCompleted[3] = true;
 
-            GLASS_OF_WATER.GetComponent<MeshCollider>().enabled = true;
+            GLASS_OF_WATER.GetComponent<BoxCollider>().enabled = true;
             GLASS_OF_WATER.GetComponent<Rigidbody>().useGravity = true;
         }
 
@@ -183,6 +200,7 @@ public class RT_GameManager : MonoBehaviour
             StartCoroutine(Step4());
             ActionsCompleted[4] = true;
         }
+
     }
 
     void InitializeDefaultData()
@@ -195,13 +213,17 @@ public class RT_GameManager : MonoBehaviour
             Guides[i].SetActive(false);
         }
 
+        NASOGASTRIC_TUBE.SetActive(true);
+        TAPE.SetActive(true);
+        WATER_SOLUBLE_LUBRICANT.SetActive(true);
+        GLASS_OF_WATER.SetActive(true);
         //Disable all Interactables/Grabbable property of GrabbableObjects, except 1st
 
         // 1) Disable all Box Colliders to avoid getting grabbed.
-        NASOGASTRIC_TUBE.GetComponent<MeshCollider>().enabled = false;
-        WATER_SOLUBLE_LUBRICANT.GetComponent<MeshCollider>().enabled = false;
-        GLASS_OF_WATER.GetComponent<MeshCollider>().enabled = false;
-        TAPE.GetComponent<MeshCollider>().enabled = false;
+        NASOGASTRIC_TUBE.GetComponent<BoxCollider>().enabled = false;
+        WATER_SOLUBLE_LUBRICANT.GetComponent<BoxCollider>().enabled = false;
+        GLASS_OF_WATER.GetComponent<BoxCollider>().enabled = false;
+        TAPE.GetComponent<BoxCollider>().enabled = false;
        
 
         // 2) Disable all Gravity since Box Colliders are off
@@ -225,6 +247,7 @@ public class RT_GameManager : MonoBehaviour
         MEASURE_TUBE.SetActive(false);
         measure_animation.SetActive(false);
         Guides[11].SetActive(true);
+
     }
 
     IEnumerator Step2()
@@ -235,6 +258,7 @@ public class RT_GameManager : MonoBehaviour
         yield return new WaitForSeconds(intro_VO[11].length);
         Guides[5].SetActive(false);
         Guides[13].SetActive(true);
+        smallTape_Highlighted.SetActive(true);
         yield return new WaitForSeconds(4f);
         Guides[13].SetActive(false);
         Guides[12].SetActive(true);
@@ -254,11 +278,13 @@ public class RT_GameManager : MonoBehaviour
 
         Guides[7].SetActive(true);
         audioSource.PlayOneShot(intro_VO[13]);
-        measure_animation.SetActive(true);
-        measure_animation.GetComponent<Animator>().Play("Hand_insertTube_movement");
+        Fix_Insertion_TUBE.SetActive(true);
+        tube_insert_animation.SetActive(true);
+        tube_insert_animation.GetComponent<Animator>().Play("Hand_insertTube_movement");
         character_animation.GetComponent<Animator>().Play("Rising_head_forTubeInsertion_clone");
         yield return new WaitForSeconds(intro_VO[13].length);
         Guides[7].SetActive(false);
+        tube_insert_animation.SetActive(false);
         yield return new WaitForSeconds(4f);
 
         Guides[8].SetActive(true);
@@ -284,12 +310,12 @@ public class RT_GameManager : MonoBehaviour
         yield return new WaitForSeconds(3f);
 
         Guides[14].SetActive(true);
-       // measure_animation.SetActive(true);
-       // measure_animation.GetComponent<Animator>().Play("Hand_insertTube_movement");
+        Fix_Insertion_TUBE.SetActive(false);
         yield return new WaitForSeconds(3f);
         Guides[14].SetActive(false);
 
         Guides[10].SetActive(true);
+        FIX_NASOGASTRIC_TUBE.SetActive(true);
         audioSource.PlayOneShot(intro_VO[16]);
         yield return new WaitForSeconds(intro_VO[16].length);
         Guides[10].SetActive(false);

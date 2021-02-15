@@ -14,4 +14,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Nursing Procedures/RT Insertion/Scenes/RT Insertion.unity
     guid: 9377373a3ed8977458673f66107d6dbe
-  m_configObjects: {}
+  m_configObjects:
+    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: a0a74f9d7467fd74b96791a889303fdd,
+      type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 8b218fa6ba05bf143a5eeeaf2e2afe02,
+      type: 2}
