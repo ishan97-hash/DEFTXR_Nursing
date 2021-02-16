@@ -11,9 +11,9 @@ public class TapeCollision : MonoBehaviour
     {
         if (col.gameObject.name == "SmallTape_Highlighted")
         {
-           this.gameObject.SetActive(false);
+            go1.SetActive(false);
             go2.SetActive(false);
-            go3.SetActive(true);
+            go3.SetActive(true);      
         }
     }
 }

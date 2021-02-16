@@ -217,6 +217,8 @@ public class RT_GameManager : MonoBehaviour
         TAPE.SetActive(true);
         WATER_SOLUBLE_LUBRICANT.SetActive(true);
         GLASS_OF_WATER.SetActive(true);
+        SmallTape.SetActive(false);
+        smallTape_Highlighted.SetActive(false);
         //Disable all Interactables/Grabbable property of GrabbableObjects, except 1st
 
         // 1) Disable all Box Colliders to avoid getting grabbed.
@@ -259,7 +261,7 @@ public class RT_GameManager : MonoBehaviour
         Guides[5].SetActive(false);
         Guides[13].SetActive(true);
         smallTape_Highlighted.SetActive(true);
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(5f);
         Guides[13].SetActive(false);
         Guides[12].SetActive(true);
     }
