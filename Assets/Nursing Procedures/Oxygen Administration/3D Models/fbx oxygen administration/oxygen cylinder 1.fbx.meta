@@ -3,7 +3,12 @@ guid: a3509977b34fec441b44efc2fffaee07
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: OXYGEN_CYLINDER_M
+    second: {fileID: 2100000, guid: 399b17788bc9e134d82e4f7cfb324635, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
