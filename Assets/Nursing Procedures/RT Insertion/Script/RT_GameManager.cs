@@ -167,8 +167,10 @@ public class RT_GameManager : MonoBehaviour
             StartCoroutine(Step1());
             ActionsCompleted[1] = true;
 
+            Tape_Highlighted.SetActive(true);
+            TAPE.SetActive(false);
             TAPE.GetComponent<BoxCollider>().enabled = true;
-            TAPE.GetComponent<Rigidbody>().useGravity = true; 
+            TAPE.GetComponent<Rigidbody>().useGravity = true;
         }
 
         if (TAPE.GetComponent<OVRGrabbable>().isGrabbed == true && ActionsCompleted[2] == false)
@@ -180,6 +182,7 @@ public class RT_GameManager : MonoBehaviour
 
             WATER_SOLUBLE_LUBRICANT.GetComponent<BoxCollider>().enabled = true;
             WATER_SOLUBLE_LUBRICANT.GetComponent<Rigidbody>().useGravity = true;
+
         }
 
         if (WATER_SOLUBLE_LUBRICANT.GetComponent<OVRGrabbable>().isGrabbed == true && ActionsCompleted[3] == false)

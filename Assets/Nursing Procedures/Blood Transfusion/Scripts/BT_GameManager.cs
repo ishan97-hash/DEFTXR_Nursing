@@ -144,10 +144,10 @@ public class BT_GameManager : MonoBehaviour
 
         }
 
-        if (NS_Bag.GetComponent<OVRGrabbable>().isGrabbed == true && ActionsCompleted[3] == false)
+        if (gloves.GetComponent<OVRGrabbable>().isGrabbed == true && ActionsCompleted[4] == false)
         {
             StartCoroutine(Step3());
-            ActionsCompleted[3] = true;
+            ActionsCompleted[4] = true;
 
 
         }
