@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 320fa43675c18b945b358757b6fa4509
+guid: 1c65cc1ca4aa6254eaca9cd0c421e8d9
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
@@ -7,9 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: lambert1
-    second: {fileID: 5561349426305759274, guid: 9475c32bec2e11a4f819cd21e9e9eafa,
-      type: 3}
+      name: Non_rebreather_mask_M
+    second: {fileID: 2100000, guid: 7069447ac0e32334483d65b8b8bdf234, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0

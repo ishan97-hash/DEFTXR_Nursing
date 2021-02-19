@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 320fa43675c18b945b358757b6fa4509
+guid: 669e2d7ce9553b443b7641b29cc2a43f
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
@@ -7,9 +7,18 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: lambert1
-    second: {fileID: 5561349426305759274, guid: 9475c32bec2e11a4f819cd21e9e9eafa,
-      type: 3}
+      name: Oxygen_cylinder_body_M
+    second: {fileID: 2100000, guid: f58d384a0f2a78c46b17dd7f9c984918, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Oxygen_cylinder_metal_M
+    second: {fileID: 2100000, guid: c02e8b522a234364eac2f84624831cf2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Oxygen_cylinder_transparent_M
+    second: {fileID: 2100000, guid: 2c710d22ca0cd714d8009f682dd01c17, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0

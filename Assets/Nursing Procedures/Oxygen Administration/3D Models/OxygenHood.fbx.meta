@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 320fa43675c18b945b358757b6fa4509
+guid: fef0bf7f2799e3e4cbfc7c10f243f3be
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
@@ -7,9 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: lambert1
-    second: {fileID: 5561349426305759274, guid: 9475c32bec2e11a4f819cd21e9e9eafa,
-      type: 3}
+      name: oxygen_hood_M
+    second: {fileID: 2100000, guid: 460f4853e8c91bd4b9e39e51f88b2e76, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0

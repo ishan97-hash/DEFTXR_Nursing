@@ -3,7 +3,48 @@ guid: 24db825a07dab3c4690456f0b9145864
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert1
+    second: {fileID: 5561349426305759274, guid: a3509977b34fec441b44efc2fffaee07,
+      type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: non_rebreather_mask_M
+    second: {fileID: 6889026617531137171, guid: 9475c32bec2e11a4f819cd21e9e9eafa,
+      type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: non_rebreather_mask_M1
+    second: {fileID: 4063074433765024233, guid: 9475c32bec2e11a4f819cd21e9e9eafa,
+      type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: non_rebreter_mask_M
+    second: {fileID: 8642379660996124764, guid: 9475c32bec2e11a4f819cd21e9e9eafa,
+      type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: non_rebrether_mask_M
+    second: {fileID: 8642379660996124764, guid: 9475c32bec2e11a4f819cd21e9e9eafa,
+      type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: non_rebrether_mask_M1
+    second: {fileID: 705483721880853904, guid: 9475c32bec2e11a4f819cd21e9e9eafa, type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: non_rebrether_mask_M2
+    second: {fileID: -5619382494729354389, guid: 9475c32bec2e11a4f819cd21e9e9eafa,
+      type: 3}
   materials:
     materialImportMode: 1
     materialName: 0
