@@ -3,7 +3,19 @@ guid: 99d7b7bf3a950954d97133ca75f62ec3
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert1
+    second: {fileID: 5561349426305759274, guid: 24db825a07dab3c4690456f0b9145864,
+      type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: oxygen_hood_M
+    second: {fileID: -7554573953606727240, guid: 9475c32bec2e11a4f819cd21e9e9eafa,
+      type: 3}
   materials:
     materialImportMode: 1
     materialName: 0
